@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add direct font-face declarations as a backup */
+/* @font-face {
+  font-family: 'Ivy Mode';
+  src: url('/font/IvyMode-Regular.woff2') format('woff2'),
+       url('/font/IvyMode-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+} */
+
+@font-face {
+  font-family: "Ivy Mode";
+  src: url("/font/IvyMode-Light.woff2") format("woff2"),
+    url("/font/IvyMode-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: white;
+}
+
+/* Hide Google Translate Toolbar completely */
+.skiptranslate,
+.goog-te-banner-frame,
+#goog-gt-tt {
+  display: none !important;
+}
+
+body {
+  top: 0px !important;
+}
+
+/* Remove margin added by Google Translate */
+body > .goog-te-banner-frame {
+  display: none !important;
+}
