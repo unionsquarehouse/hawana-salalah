@@ -107,11 +107,11 @@ export default function Navbar() {
               </div>
 
               <Link
-                href="/contact"
+                href="/about"
                 className="font-ivy font-semibold px-3 py-2 rounded-md text-white hover:bg-white/10 hover:text-white transition-colors"
-                aria-label="Contact"
+                aria-label="About"
               >
-                Contact
+                About
               </Link>
 
               <LanguageSwitcher />

@@ -90,7 +90,7 @@ export default function Footer() {
             <Link href="/" className="inline-block">
               <div className="w-48 h-24 relative">
                 <Image
-                  src="/assets/hawana/hawana-salalah-logo.webp"
+                  src="/assets/hawana-logo.webp"
                   alt="Hawana Salalah Logo"
                   fill
                   className="object-contain"
