@@ -4,16 +4,11 @@ import Image from "next/image";
 import {
   FaArrowRight,
   FaChevronDown,
-  FaPlus,
-  FaCity,
   FaSpa,
   FaWater,
   FaSwimmer,
-  FaLeaf,
-  FaTree,
-  FaChild,
-  FaBiking,
-  FaYinYang,
+  FaUmbrellaBeach,
+  FaBuilding,
 } from "react-icons/fa";
 import InteriorDesignSection from "./sections/PropertyInteriorDesignSection";
 import CTASection from "./sections/CTASection";
@@ -47,14 +42,13 @@ const HeroSection = ({
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className=" px-4"
+        className="px-4"
       >
         <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 font-ivy tracking-tight">
           {property?.name}
         </h1>
-        <p className=" text-white/90 text-xl md:text-3xl mb-10 mx-auto font-light">
-          {details?.tagline ||
-            "A revolutionary living experience where luxury meets sustainable innovation"}
+        <p className="text-white/90 text-xl md:text-3xl mb-10 mx-auto font-sans font-light">
+          {details?.tagline}
         </p>
         <div className="flex flex-wrap gap-4 justify-center">
           <button
@@ -63,15 +57,24 @@ const HeroSection = ({
           >
             <span className="relative z-10 flex items-center gap-2 text-brand">
               <FaArrowRight className="md:text-md" />
-              <span className="md:text-md"> Reserve Now</span>
+              <span className="md:text-md">Reserve Now</span>
             </span>
             <span className="absolute inset-0 bg-gradient-to-r from-white via-white to-white/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
           </button>
+          <a
+            href="/assets/hawana/amazi-brochure.pdf"
+            download
+            className="group relative overflow-hidden rounded-full bg-transparent border border-white px-8 py-4 text-white transition-all hover:shadow-lg hover:shadow-white/20"
+          >
+            <span className="relative z-10 flex items-center gap-2">
+              <span className="md:text-md">Download Brochure</span>
+            </span>
+            <span className="absolute inset-0 bg-gradient-to-r from-white/20 via-white/20 to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+          </a>
         </div>
       </motion.div>
     </motion.div>
 
-    {/* Scroll indicator */}
     <motion.div
       className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10"
       animate={{ y: [0, 10, 0] }}
@@ -86,7 +89,7 @@ const HeroSection = ({
 const StatsBar = ({ details, property }) => (
   <div className="relative z-30 mx-auto px-4 -mt-16">
     <motion.div
-      className="w-[90vw] mx-auto grid grid-cols-2 gap-4 bg-white/90 backdrop-blur-lg rounded-2xl shadow-2xl shadow-black/5 p-1 border border-white/20"
+      className="w-[95vw] xl:w-[75vw] mx-auto grid grid-cols-2 gap-4 bg-white/90 backdrop-blur-lg rounded-2xl shadow-2xl shadow-black/5 p-1 border border-white/20"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -114,7 +117,7 @@ const StatsBar = ({ details, property }) => (
 // Overview Section Component
 const OverviewSection = ({ property, details }) => (
   <div className="py-32">
-    <div className=" md:w-[95vw] mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="w-[95vw] xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
@@ -123,18 +126,16 @@ const OverviewSection = ({ property, details }) => (
           viewport={{ once: true, margin: "-100px" }}
         >
           <h2 className="text-4xl md:text-6xl font-bold text-brand mb-8 font-ivy relative">
-            <span className="relative z-10">Visionary Living</span>
+            <span className="relative z-10">Exclusive Waterfront Living</span>
             <span className="absolute -left-4 top-1/2 -translate-y-1/2 w-16 h-16 bg-brand/10 rounded-full blur-xl z-0"></span>
           </h2>
 
-          <p className="text-brand text-sm md:text-lg mb-6  font-sans">
+          <p className="text-brand text-sm md:text-lg mb-6 font-sans">
             {details.description}
           </p>
 
-          <p className="text-brand text-sm md:text-lg mb-6  font-sans  ">
-            {property.name} represents the future of residential living, where
-            cutting-edge technology seamlessly integrates with sustainable
-            design principles to create an unparalleled living experience.
+          <p className="text-brand text-sm md:text-lg mb-6 font-sans">
+            {property.name} redefines luxury with its seamless blend of modern architecture and the serene beauty of Hawana Salalah’s Arabian Sea coastline, offering an unparalleled resort lifestyle.
           </p>
 
           <div className="grid grid-cols-2 gap-6 mb-8">
@@ -162,7 +163,7 @@ const OverviewSection = ({ property, details }) => (
         >
           <div className="relative h-[600px] rounded-2xl overflow-hidden">
             <Image
-              src={details.image}
+              src={details.image2}
               alt={property.name}
               fill
               className="object-cover"
@@ -184,9 +185,9 @@ const AmenitiesSection = ({
 }) => (
   <section
     ref={amenitiesSectionRef}
-    className="bg-gradient-to-b from-[#f8f9f6] to-white text-[#2e3d28] py-20 overflow-hidden"
+    className="bg-gradient-to-b from-gray-50 to-white text-brand py-20 overflow-hidden"
   >
-    <div className=" md:w-[95vw] px-6 md:px-20  mx-auto">
+    <div className="w-[95vw] xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div
         className="text-center mb-16"
         initial={{ opacity: 0, y: 30 }}
@@ -194,17 +195,15 @@ const AmenitiesSection = ({
         transition={{ duration: 0.8 }}
       >
         <h2 className="text-4xl md:text-6xl font-bold text-brand mb-8 font-ivy">
-          Harmony with Nature
+          Resort-Style Amenities
         </h2>
-        <div className="h-0.5 w-24 bg-[#6a7d5a] mx-auto mb-6" />
-        <p className="text-brand text-sm md:text-lg mb-6  font-sans">
-          Experience a community designed to nurture both body and soul, where
-          every amenity is thoughtfully integrated with the natural environment.
+        <div className="h-0.5 w-24 bg-brand mx-auto mb-6" />
+        <p className="text-brand text-sm md:text-lg mb-6 font-sans">
+          Immerse yourself in a world-class resort lifestyle with amenities that complement the natural beauty of Hawana Salalah’s coastline.
         </p>
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        {/* Left side - Image display */}
         <motion.div
           className="lg:col-span-7 relative rounded-xl overflow-hidden"
           initial={{ opacity: 0, x: -30 }}
@@ -252,7 +251,6 @@ const AmenitiesSection = ({
             </motion.div>
           ))}
 
-          {/* Image indicators */}
           <div className="absolute bottom-4 right-4 flex gap-2">
             {amenitiesData.map((_, index) => (
               <motion.button
@@ -267,14 +265,13 @@ const AmenitiesSection = ({
           </div>
         </motion.div>
 
-        {/* Right side - Amenities list */}
         <motion.div
           className="lg:col-span-5"
           initial={{ opacity: 0, x: 30 }}
           animate={isAmenitiesVisible ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-sm border border-[#e0e5dd]">
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-sm border border-white/20">
             <h3 className="text-2xl md:text-3xl font-ivy mb-6 font-semibold text-brand">
               Our Amenities
             </h3>
@@ -285,8 +282,8 @@ const AmenitiesSection = ({
                   key={index}
                   className={`p-4 rounded-lg cursor-pointer transition-all duration-300 ${
                     activeAmenityIndex === index
-                      ? "bg-[#2e3d28] text-white"
-                      : "bg-[#f8f9f6] hover:bg-[#e0e5dd]"
+                      ? "bg-brand text-white"
+                      : "bg-gray-50 hover:bg-gray-100"
                   }`}
                   onClick={() => setActiveAmenityIndex(index)}
                   whileHover={{ x: 5 }}
@@ -296,7 +293,7 @@ const AmenitiesSection = ({
                       className={`text-xl ${
                         activeAmenityIndex === index
                           ? "text-white"
-                          : "text-[#6a7d5a]"
+                          : "text-brand"
                       }`}
                     >
                       {amenity.icon}
@@ -335,7 +332,6 @@ export default function Property({ property }) {
   const [showModal, setShowModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
-  // Parallax effect for hero section
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"],
@@ -344,42 +340,34 @@ export default function Property({ property }) {
   const heroScale = useTransform(scrollYProgress, [0, 1], [1, 1.1]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
-  // Amenities data
   const amenitiesData = [
     {
-      name: "Enchanted Forest",
-      icon: <FaLeaf />,
+      name: "Beach Club",
+      icon: <FaUmbrellaBeach />,
       description:
-        "Wander through our carefully preserved natural forest with walking trails, meditation spots, and native wildlife.",
-      image: "/assets/amenities/enchanted-forest.jpg",
+        "Unwind at our exclusive Beach Club, offering direct access to pristine white sandy beaches and curated coastal experiences.",
+      image: "/assets/hawana/beach-club.jpg",
     },
     {
-      name: "Forest Pools",
+      name: "Wellness Centre",
+      icon: <FaSpa />,
+      description:
+        "Rejuvenate in our state-of-the-art Wellness Centre with spa treatments inspired by Omani traditions.",
+      image: "/assets/hawana/wellness-centre.jpg",
+    },
+    {
+      name: "Entertainment Centre",
       icon: <FaSwimmer />,
       description:
-        "Enjoy our naturally designed swimming areas that blend seamlessly with the surrounding landscape.",
-      image: "/assets/amenities/forest-pools.jpg",
+        "Connect and relax in our vibrant Entertainment Centre, a hub for community events and leisure activities.",
+      image: "/assets/hawana/entertainment-centre.jpg",
     },
     {
-      name: "Kids Nature Gardens",
-      icon: <FaChild />,
+      name: "Water Sports Centre",
+      icon: <FaSwimmer />,
       description:
-        "A magical space where children can learn about nature through play and exploration.",
-      image: "/assets/amenities/kids-garden.jpg",
-    },
-    {
-      name: "Mountain Bike Loop",
-      icon: <FaBiking />,
-      description:
-        "Challenge yourself on our professionally designed mountain bike trails for all skill levels.",
-      image: "/assets/amenities/bike-Loop.jpg",
-    },
-    {
-      name: "Wellness & Yoga Pavilion",
-      icon: <FaYinYang />,
-      description:
-        "Find balance and tranquility in our open-air pavilion surrounded by the sounds of nature.",
-      image: "/assets/amenities/yoga-pavilion.jpg",
+        "Dive into adventure with our Water Sports Centre, offering activities from kayaking to sailing on the Arabian Sea.",
+      image: "/assets/hawana/water-sports-centre.jpg",
     },
   ];
 
@@ -406,391 +394,96 @@ export default function Property({ property }) {
     };
   }, []);
 
-  // Get property details based on name
-  const getPropertyDetails = (name) => {
-    const propertyMap = {
-      Capria: {
-        name: "Capria",
-        specs: "Luxury Villas • 5-7 Bedrooms",
-        price: "Starting from AED 1.5M",
+  const getPropertyDetails = () => ({
+    name: "Amazi",
+    specs: "Luxury Villas & Chalets • 1-4 Bedrooms",
+    price: "Starting from OMR 78,000",
+    description:
+      "Amazi offers an exclusive waterfront lifestyle in Hawana Salalah, with stunning ocean views, freehold ownership, and Omani residency benefits for all nationalities.",
+    description2:
+      "Designed by SB Architects, Amazi blends modern luxury with Oman’s natural coastal beauty, creating a serene paradise with world-class amenities.",
+    tagline:
+      "Experience living on a whole new level with stunning oceanfront homes at Amazi.",
+    features: [
+      "Stunning Water Views",
+      "Freehold Ownership",
+      "Omani Residency",
+      "High-End Architecture",
+    ],
+    image: "/assets/hawana/4.jpg",
+    image2: "/assets/hawana/21.jpg",
+    amenities: [
+      {
+        name: "Beach Club",
+        icon: <FaUmbrellaBeach className="text-brand" />,
         description:
-          "Exclusive forest-edge villas with private gardens and infinity pools. Nestled among ancient ghaf trees, these residences offer unparalleled privacy and tranquility.",
-        description2:
-          "Crafted to create an environment and culture that promotes health and wellbeing in all its forms, the Capria sanctuary is a haven of serenity and wellness.",
-        features: [
-          "Private Infinity Pools",
-          "Smart Home Technology",
-          "Expansive Gardens",
-          "Floor-to-ceiling Windows",
-        ],
-        image: "/assets/properties/capria.jpg",
-        amenities: [
-          {
-            name: "Wellness Center",
-            icon: <FaSpa className="text-brand" />,
-            description:
-              "State-of-the-art spa and fitness facilities with personal trainers and wellness experts.",
-          },
-        ],
-        interiorTypes: {
-          radiance: {
-            name: "Radiance",
-            description:
-              "Bright, airy interiors that maximize natural light and create a sense of expansiveness. The Radiance collection features light wood tones, reflective surfaces, and a neutral color palette.",
-            features: [
-              "Floor-to-ceiling windows",
-              "Light oak finishes",
-              "Integrated smart lighting",
-              "Minimalist design elements",
-            ],
-            image: [
-              "/assets/interiors/radiance1-capria.jpg",
-              "/assets/interiors/radiance2-capria.jpg",
-            ],
-          },
-          twilight: {
-            name: "Twilight",
-            description:
-              "Rich, sophisticated interiors that create a sense of luxury and intimacy. The Twilight collection features dark wood accents, textured fabrics, and ambient lighting.",
-            features: [
-              "Walnut wood accents",
-              "Textured wall treatments",
-              "Ambient lighting systems",
-              "Statement furniture pieces",
-            ],
-            image: [
-              "/assets/interiors/twilight1-capria.jpg",
-              "/assets/interiors/twilight2-capria.jpg",
-            ],
-          },
-        },
-        biophilicDesign: {
-          title: "Forest Integration",
-          description:
-            "Capria villas are designed to integrate seamlessly with the surrounding forest, with living spaces that blur the boundaries between indoors and outdoors. The architecture respects and enhances the natural environment.",
-          features: [
-            "Living green walls",
-            "Natural ventilation systems",
-            "Indigenous plant integration",
-            "Water conservation features",
-          ],
-          image: "/assets/biophilic/capria.jpg",
-        },
+          "Exclusive access to a luxurious Beach Club with pristine beaches and coastal activities.",
       },
-      Lacina: {
-        name: "Lacina",
-        specs: "Waterfront Residences • 3-5 Bedrooms",
-        price: "Starting from AED 1.4M",
+      {
+        name: "Wellness Centre",
+        icon: <FaSpa className="text-brand" />,
         description:
-          "Lacina is more than a home—it's a lifestyle where every step aligns with nature’s rhythm.",
-        description2:
-          "Enjoy a vibrant, balanced life surrounded by the tranquility of the forest and unique amenities that blend seamlessly with the natural world.",
-        features: [
-          "Private Docks",
-          "Panoramic Water Views",
-          "Outdoor Terraces",
-          "Premium Finishes",
-        ],
-        image: "/assets/properties/lacina.jpg",
-        amenities: [
-          {
-            name: "Yacht Club",
-            icon: <FaWater className="text-brand" />,
-            description:
-              "Exclusive membership to the community yacht club with concierge services.",
-          },
-          {
-            name: "Beach Access",
-            icon: <FaSwimmer className="text-brand" />,
-            description:
-              "Private beach areas with cabanas and water sports equipment.",
-          },
-        ],
-        interiorTypes: {
-          radiance: {
-            name: "Radiance",
-            description:
-              "Bright, airy interiors that maximize natural light and create a sense of expansiveness. The Radiance collection features light wood tones, reflective surfaces, and a neutral color palette.",
-            features: [
-              "Floor-to-ceiling windows",
-              "Light oak finishes",
-              "Integrated smart lighting",
-              "Minimalist design elements",
-            ],
-            image: [
-              "/assets/interiors/radiance1-lacina.jpg",
-              "/assets/interiors/radiance2-lacina.jpg",
-            ],
-          },
-          twilight: {
-            name: "Twilight",
-            description:
-              "Rich, sophisticated interiors that create a sense of luxury and intimacy. The Twilight collection features dark wood accents, textured fabrics, and ambient lighting.",
-            features: [
-              "Walnut wood accents",
-              "Textured wall treatments",
-              "Ambient lighting systems",
-              "Statement furniture pieces",
-            ],
-            image: [
-              "/assets/interiors/twilight1-lacina.jpg",
-              "/assets/interiors/twilight2-lacina.jpg",
-            ],
-          },
-        },
-        biophilicDesign: {
-          title: "Water Integration",
-          description:
-            "Lacina residences celebrate their waterfront location with design elements that reflect and interact with the water. The architecture creates a seamless transition between indoor living spaces and the lagoon.",
-          features: [
-            "Reflective surfaces",
-            "Water features",
-            "Natural cooling systems",
-            "Sustainable water management",
-          ],
-          image: "/assets/biophilic/lacina.jpg",
-        },
+          "A state-of-the-art facility offering spa treatments and wellness programs inspired by Omani heritage.",
       },
-      Serra: {
-        name: "Serra",
-        specs: "Garden Townhouses • 3-4 Bedrooms",
-        price: "Starting from AED 2M",
+    ],
+    interiorTypes: {
+      coastal: {
+        name: "Coastal",
         description:
-          "Contemporary townhouses surrounded by lush community gardens. These elegant homes combine modern design with natural surroundings for balanced living.",
-        description2:
-          "Colours, texture, shapes and light all come together in Serra. From abstract ideas to immersive nature, the subtle combination creates an unprecedented living experience.",
+          "Bright, airy interiors with soft blues, whites, and natural textures, inspired by the Arabian Sea.",
         features: [
-          "Community Gardens",
-          "Rooftop Terraces",
-          "Double-height Ceilings",
-          "Private Courtyards",
+          "Floor-to-ceiling windows",
+          "Light wood finishes",
+          "Ocean-inspired palette",
+          "Minimalist coastal design",
         ],
-        image: "/assets/properties/serra.jpg",
-        amenities: [
-          {
-            name: "Community Gardens",
-            icon: <FaLeaf className="text-brand" />,
-            description:
-              "Shared organic gardens with dedicated plots for residents.",
-          },
-          {
-            name: "Garden Pavilion",
-            icon: <FaTree className="text-brand" />,
-            description:
-              "Community gathering spaces nestled within landscaped gardens.",
-          },
+        image: [
+          "/assets/hawana/interiors/coastal1-amazi.jpg",
+          "/assets/hawana/interiors/coastal2-amazi.jpg",
         ],
-        interiorTypes: {
-          radiance: {
-            name: "Radiance",
-            description:
-              "Bright, airy interiors that maximize natural light and create a sense of expansiveness. The Radiance collection features light wood tones, reflective surfaces, and a neutral color palette.",
-            features: [
-              "Floor-to-ceiling windows",
-              "Light oak finishes",
-              "Integrated smart lighting",
-              "Minimalist design elements",
-            ],
-            image: [
-              "/assets/interiors/radiance1-serra.jpg",
-              "/assets/interiors/radiance2-serra.jpg",
-            ],
-          },
-          twilight: {
-            name: "Twilight",
-            description:
-              "Rich, sophisticated interiors that create a sense of luxury and intimacy. The Twilight collection features dark wood accents, textured fabrics, and ambient lighting.",
-            features: [
-              "Walnut wood accents",
-              "Textured wall treatments",
-              "Ambient lighting systems",
-              "Statement furniture pieces",
-            ],
-            image: [
-              "/assets/interiors/twilight1-serra.jpg",
-              "/assets/interiors/twilight2-serra.jpg",
-            ],
-          },
-        },
-        biophilicDesign: {
-          title: "Garden Integration",
-          description:
-            "Serra townhouses blur the boundaries between home and garden with courtyards, terraces, and green spaces integrated throughout the living areas. The vertical gardens and rooftop ecosystems create a continuous connection with nature.",
-          features: [
-            "Vertical gardens",
-            "Rooftop ecosystems",
-            "Courtyard integration",
-            "Natural ventilation",
-          ],
-          image: "/assets/biophilic/serra.jpg",
-        },
       },
-      Distrikt: {
-        name: "Distrikt",
-        specs: "Hillside Villas • 4-6 Bedrooms",
-        price: "Starting from AED 1.2M",
+      oasis: {
+        name: "Oasis",
         description:
-          "Bursting with vitality and brimming with life, this vibrant vertical community elevates modern living to new heights.",
-        description2:
-          "Bursting with vitality and brimming with life, this vibrant vertical community elevates modern living to new heights. Where the city’s electric energy meets nature’s beauty and calm, offering you the best of both worlds.",
+          "Warm, elegant interiors with rich tones and luxurious textures, evoking the tranquility of an Omani oasis.",
         features: [
-          "Panoramic Views",
-          "Private Terraces",
-          "Luxury Finishes",
-          "Integrated Smart Systems",
+          "Warm wood accents",
+          "Textured wall treatments",
+          "Ambient lighting systems",
+          "Luxury furniture pieces",
         ],
-        image: "/assets/properties/distrikt.jpg",
-        amenities: [
-          {
-            name: "Panoramic Lounge",
-            icon: <FaCity className="text-brand" />,
-            description:
-              "Exclusive residents' lounge with panoramic city views.",
-          },
-          {
-            name: "Infinity Edge Pool",
-            icon: <FaSwimmer className="text-brand" />,
-            description: "Dramatic infinity pool overlooking the city skyline.",
-          },
+        image: [
+          "/assets/hawana/interiors/oasis1-amazi.jpg",
+          "/assets/hawana/interiors/oasis2-amazi.jpg",
         ],
-        interiorTypes: {
-          terra: {
-            name: "Terra",
-            description:
-              "Bright, airy interiors that maximize natural light and create a sense of expansiveness. The Radiance collection features light wood tones, reflective surfaces, and a neutral color palette.",
-            features: [
-              "Floor-to-ceiling windows",
-              "Light oak finishes",
-              "Integrated smart lighting",
-              "Minimalist design elements",
-            ],
-            image: [
-              "/assets/interiors/terra1-distikt.jpg",
-              "/assets/interiors/terra2-distrikt.jpg",
-            ],
-          },
-          horizon: {
-            name: "Horizon",
-            description:
-              "Rich, sophisticated interiors that create a sense of luxury and intimacy. The Twilight collection features dark wood accents, textured fabrics, and ambient lighting.",
-            features: [
-              "Walnut wood accents",
-              "Textured wall treatments",
-              "Ambient lighting systems",
-              "Statement furniture pieces",
-            ],
-            image: [
-              "/assets/interiors/horizon1-distrikt.jpg",
-              "/assets/interiors/horizon2-distrikt.jpg",
-            ],
-          },
-        },
-        biophilicDesign: {
-          title: "Hillside Integration",
-          description:
-            "Distrikt villas are designed to follow the natural contours of the hillside, minimizing environmental impact while maximizing views. The architecture celebrates the topography and creates a harmonious relationship with the landscape.",
-          features: [
-            "Terraced design",
-            "Native landscaping",
-            "Rainwater harvesting",
-            "Natural cooling systems",
-          ],
-          image: "/assets/biophilic/distrikt.jpg",
-        },
       },
-      Cilia: {
-        name: "Cilia",
-        specs: "Luxury Apartments • 1-3 Bedrooms",
-        price: "Starting from AED 1.3M",
-        description:
-          "Elegant apartments with premium finishes and resort-style amenities. Perfect for those seeking a low-maintenance lifestyle without compromising on luxury.",
-        description2:
-          "The attention to detail in Cilia is immaculate. With expansive spaces that extend both horizontally and vertically, an apartment can feel like a world of its own.",
-        features: [
-          "Concierge Service",
-          "Spa & Wellness Center",
-          "Infinity Edge Pools",
-          "Private Balconies",
-        ],
-        image: "/assets/properties/cilia.jpg",
-        amenities: [
-          {
-            name: "Concierge Services",
-            icon: <FaCity className="text-brand" />,
-            description: "24/7 concierge and lifestyle management services.",
-          },
-          {
-            name: "Wellness Spa",
-            icon: <FaSpa className="text-brand" />,
-            description:
-              "Luxury spa facilities with treatment rooms and relaxation areas.",
-          },
-        ],
-        interiorTypes: {
-          radiance: {
-            name: "Radiance",
-            description:
-              "Bright, airy interiors that maximize natural light and create a sense of expansiveness. The Radiance collection features light wood tones, reflective surfaces, and a neutral color palette.",
-            features: [
-              "Floor-to-ceiling windows",
-              "Light oak finishes",
-              "Integrated smart lighting",
-              "Minimalist design elements",
-            ],
-            image: [
-              "/assets/interiors/radiance1-cilia.jpg",
-              "/assets/interiors/radiance2-cilia.jpg",
-            ],
-          },
-          twilight: {
-            name: "Twilight",
-            description:
-              "Rich, sophisticated interiors that create a sense of luxury and intimacy. The Twilight collection features dark wood accents, textured fabrics, and ambient lighting.",
-            features: [
-              "Walnut wood accents",
-              "Textured wall treatments",
-              "Ambient lighting systems",
-              "Statement furniture pieces",
-            ],
-            image: [
-              "/assets/interiors/twilight1-cilia.jpg",
-              "/assets/interiors/twilight2-cilia.jpg",
-            ],
-          },
-        },
-        biophilicDesign: {
-          title: "Urban Oasis",
-          description:
-            "Cilia apartments create an urban oasis with carefully curated plant life, natural materials, and biophilic design elements that bring nature into the heart of apartment living. The sensory experience of nature is integrated throughout the living spaces.",
-          features: [
-            "Indoor gardens",
-            "Natural material palette",
-            "Optimized natural light",
-            "Acoustic nature elements",
-          ],
-          image: "/assets/biophilic/cilia.jpg",
-        },
-      },
-    };
+    },
+    biophilicDesign: {
+      title: "Coastal Integration",
+      description:
+        "Amazi’s design integrates seamlessly with Hawana Salalah’s coastline, using natural materials and open layouts to enhance the connection to the Arabian Sea.",
+      features: [
+        "Living green walls",
+        "Natural ventilation systems",
+        "Coastal plant integration",
+        "Water conservation features",
+      ],
+      image: "/assets/hawana/biophilic/amazi.jpg",
+    },
+  });
 
-    return propertyMap[name] || {};
-  };
-
-  const details = getPropertyDetails(property.name);
+  const details = getPropertyDetails();
   const interiorKeys = Object.keys(details.interiorTypes || {});
   const [activeInteriorType, setActiveInteriorType] = useState(
     interiorKeys[0] || ""
   );
-
-  console.log(property, "----------------------------");
-  console.log(selectedProject, "====================");
 
   const handleModalSubmit = (formData, { onSuccess, onError }) => {
     const leadData = {
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
-      title: selectedProject?.name || "Unknown",
+      title: selectedProject?.name || "Amazi",
       priceRange: formData.priceRange,
       bedrooms: formData.bedrooms,
     };
@@ -841,12 +534,13 @@ export default function Property({ property }) {
         isAmenitiesVisible={isAmenitiesVisible}
         amenitiesSectionRef={amenitiesSectionRef}
       />
-      {/* 
+
       <InteriorDesignSection
         details={details}
         activeInteriorType={activeInteriorType}
         setActiveInteriorType={setActiveInteriorType}
-      /> */}
+      />
+
       <CTASection />
 
       {showModal && selectedProject && (

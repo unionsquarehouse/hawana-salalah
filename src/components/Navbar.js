@@ -8,7 +8,7 @@ import { LanguageSwitcher } from "./language-switcher";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isPropertiesOpen, setIsPropertiesOpen] = useState(false);
+  const [isLaunchesOpen, setIsLaunchesOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -29,7 +29,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsPropertiesOpen(false);
+        setIsLaunchesOpen(false);
       }
     };
 
@@ -40,26 +40,23 @@ export default function Navbar() {
   }, []);
 
   const properties = [
-    { name: "Amazi Cove", type: "chalets" },
-    { name: "Amazi Rise", type: "villas" },
-    { name: "Amazi Islands", type: "villas" },
-    { name: "Amazi Beach", type: "villas" },
+    { name: "Amazi", type: "villa" },
   ];
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 py-3   ${
+      className={`fixed w-full z-50 transition-all duration-300 py-3 ${
         scrolled ? "bg-brand shadow-md" : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-[95vw] xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" aria-label="Amazi at Hawana Salalah Home">
+            <Link href="/" aria-label="Hawana Salalah Home">
               <Image
                 src="/assets/hawana-logo.webp"
-                alt="Amazi at Hawana Salalah Logo"
+                alt="Hawana Salalah Logo"
                 width={150}
                 height={50}
                 priority
@@ -79,18 +76,18 @@ export default function Navbar() {
                 Home
               </Link>
 
-              {/* Properties Dropdown */}
+              {/* Latest Launches Dropdown */}
               <div className="relative" ref={dropdownRef}>
                 <button
-                  onClick={() => setIsPropertiesOpen(!isPropertiesOpen)}
-                  className="font-ivy font-semibold px-3 py-2 rounded-md text-white hover:bg-white/10 hover:text-white transition-colors flex items-center"
-                  aria-label="Toggle Properties Menu"
+                  onClick={() => setIsLaunchesOpen(!isLaunchesOpen)}
+                  className="font-ivy font-semibold px-3 py-2 gap-2 rounded-md text-white hover:bg-white/10 hover:text-white transition-colors flex items-center"
+                  aria-label="Toggle Latest Launches Menu"
                 >
-                  Properties
+                  Latest Launches
                   <FaChevronDown className="ml-1 text-base" />
                 </button>
 
-                {isPropertiesOpen && (
+                {isLaunchesOpen && (
                   <div className="absolute left-0 mt-2 w-60 rounded-md shadow-md bg-brand border border-white/20 z-50">
                     <div className="py-1">
                       {properties.map((property) => (
@@ -98,7 +95,7 @@ export default function Navbar() {
                           key={property.name}
                           href={`/properties/${property.name.toLowerCase().replace(/\s+/g, '-')}`}
                           className="block px-4 py-2 text-base text-white hover:bg-white/10 font-sans font-semibold"
-                          onClick={() => setIsPropertiesOpen(false)}
+                          onClick={() => setIsLaunchesOpen(false)}
                           aria-label={`View ${property.name}`}
                         >
                           {property.name}
@@ -156,22 +153,22 @@ export default function Navbar() {
               Contact
             </Link>
 
-            {/* Properties Collapsible */}
+            {/* Latest Launches Collapsible */}
             <div className="border border-white/20 rounded-lg overflow-hidden">
               <button
-                onClick={() => setIsPropertiesOpen(!isPropertiesOpen)}
+                onClick={() => setIsLaunchesOpen(!isLaunchesOpen)}
                 className="w-full flex justify-between items-center px-4 py-2 font-ivy font-medium text-white hover:bg-white/10"
-                aria-label="Toggle Properties Menu"
+                aria-label="Toggle Latest Launches Menu"
               >
-                Properties
+                Latest Launches
                 <FaChevronDown
                   className={`text-base transform transition-transform duration-200 ${
-                    isPropertiesOpen ? "rotate-180" : ""
+                    isLaunchesOpen ? "rotate-180" : ""
                   }`}
                 />
               </button>
 
-              {isPropertiesOpen && (
+              {isLaunchesOpen && (
                 <div className="bg-brand/90">
                   {properties.map((property) => (
                     <Link
@@ -180,7 +177,7 @@ export default function Navbar() {
                       className="block font-ivy text-base text-white hover:bg-white/10 px-6 py-2"
                       onClick={() => {
                         setIsMenuOpen(false);
-                        setIsPropertiesOpen(false);
+                        setIsLaunchesOpen(false);
                       }}
                       aria-label={`View ${property.name}`}
                     >

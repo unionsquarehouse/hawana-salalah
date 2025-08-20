@@ -29,7 +29,7 @@ const PropertyInteriorDesignSection = ({
     if (!isClient) return;
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) =>
-        prevIndex + 1 >= interiorTypes[activeInteriorType].images.length
+        prevIndex + 1 >= interiorTypes[activeInteriorType]?.images.length
           ? 0
           : prevIndex + 1
       );
@@ -59,11 +59,11 @@ const PropertyInteriorDesignSection = ({
       : {
           radiance: {
             ...details.interiorTypes.radiance,
-            images: [details.interiorTypes.radiance.image],
+            images: [details.interiorTypes?.radiance?.image],
           },
           twilight: {
             ...details.interiorTypes.twilight,
-            images: [details.interiorTypes.twilight.image],
+            images: [details.interiorTypes?.twilight?.image],
           },
         };
 
@@ -75,14 +75,14 @@ const PropertyInteriorDesignSection = ({
   const handlePrevImage = () => {
     setCurrentImageIndex((prevIndex) =>
       prevIndex - 1 < 0
-        ? interiorTypes[activeInteriorType].images.length - 1
+        ? interiorTypes[activeInteriorType]?.images.length - 1
         : prevIndex - 1
     );
   };
 
   const handleNextImage = () => {
     setCurrentImageIndex((prevIndex) =>
-      prevIndex + 1 >= interiorTypes[activeInteriorType].images.length
+      prevIndex + 1 >= interiorTypes[activeInteriorType]?.images.length
         ? 0
         : prevIndex + 1
     );
@@ -155,7 +155,7 @@ const PropertyInteriorDesignSection = ({
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <div className="relative h-[450px] rounded-3xl overflow-hidden border border-[#475b42]/10 shadow-xl">
-              {interiorTypes[activeInteriorType].images.map((img, index) => (
+              {interiorTypes[activeInteriorType]?.images.map((img, index) => (
                 <motion.div
                   key={index}
                   className="absolute inset-0"
@@ -187,7 +187,7 @@ const PropertyInteriorDesignSection = ({
                 >
                   <Image
                     src={img}
-                    alt={`${interiorTypes[activeInteriorType].name} ${
+                    alt={`${interiorTypes[activeInteriorType]?.name} ${
                       index + 1
                     }`}
                     fill
@@ -223,7 +223,7 @@ const PropertyInteriorDesignSection = ({
               ))}
               {/* Navigation Controls */}
               {isClient &&
-                interiorTypes[activeInteriorType].images.length > 1 && (
+                interiorTypes[activeInteriorType]?.images.length > 1 && (
                   <>
                     <button
                       onClick={handlePrevImage}
@@ -238,7 +238,7 @@ const PropertyInteriorDesignSection = ({
                       <FaChevronRight />
                     </button>
                     <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                      {interiorTypes[activeInteriorType].images.map(
+                      {interiorTypes[activeInteriorType]?.images.map(
                         (_, index) => (
                           <button
                             key={index}
@@ -266,13 +266,13 @@ const PropertyInteriorDesignSection = ({
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <h3 className="text-4xl font-bold font-ivy tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-[#475b42] to-[#6a7d5a]">
-              {interiorTypes[activeInteriorType].name} Collection
+              {interiorTypes[activeInteriorType]?.name} Collection
             </h3>
             <p className="text-gray-600 text-lg leading-relaxed">
-              {interiorTypes[activeInteriorType].description}
+              {interiorTypes[activeInteriorType]?.description}
             </p>
             <div className="space-y-6">
-              {interiorTypes[activeInteriorType].features.map((feature, i) => (
+              {interiorTypes[activeInteriorType]?.features.map((feature, i) => (
                 <motion.div
                   key={i}
                   className="flex items-start gap-4"
