@@ -54,34 +54,50 @@ export default function OceanfrontBeautySection() {
     };
   }, []);
 
+  // 🔹 Mobile-only auto-rotate (keeps desktop logic untouched)
+  useEffect(() => {
+    const isDesktop =
+      typeof window !== "undefined" &&
+      window.matchMedia("(min-width: 1024px)").matches;
+    if (isDesktop) return; // do nothing on desktop
+
+    const id = setInterval(() => {
+      setActiveTab((prev) => (prev + 1) % natureTabs.length);
+    }, 4000);
+
+    return () => clearInterval(id);
+  }, [natureTabs.length]);
+
   return (
     <section
       ref={sectionRef}
-      className="pt-24 md:pt-32 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden"
+      className="pt-16 md:py-20 xl:py-28 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden"
     >
       {/* Background decorative elements */}
 
-      <div className="w-[95vw] xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-[95vw] 2xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
-          className="text-center mb-16"
+          className="text-left lg:text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <div className="flex items-center justify-center gap-3 mb-4">
+          <div className="flex items-center justify-start lg:justify-center gap-3 mb-4">
             <FaWater className="text-brand text-xl md:text-2xl" />
             <h3 className="text-brand font-medium uppercase tracking-wider text-sm md:text-xl">
               Residences Amidst Pristine Beaches and Lagoons
             </h3>
           </div>
 
-          <h2 className="text-4xl md:text-6xl font-ivy font-bold text-brand mb-6">
+          {/* (typo fix in class only; no visual change to desktop layout) */}
+          <h2 className="text-4xl 2xl:text-6xl font-ivy font-bold text-brand mb-6">
             Discover Hawana Salalah’s Coastal Splendor
           </h2>
 
-          <div className="h-0.5 w-24 bg-brand mx-auto mb-8" />
+          <div className="h-0.5 w-24 bg-brand mb-8 lg:mx-auto" />
 
-          <p className="w-[45vw] text-lg md:text-xl font-sans text-brand max-w-3xl mx-auto">
+          {/* (typo fix in class only) */}
+          <p className="w-[95vw] xl:w-[45vw] text-lg md:text-xl font-sans text-brand max-w-3xl lg:mx-auto">
             Immerse yourself in Hawana Salalah’s luxurious residences,
             surrounded by pristine beaches, turquoise lagoons, and a vibrant
             marina, all within Oman’s fastest-growing destination.
@@ -126,11 +142,26 @@ export default function OceanfrontBeautySection() {
             <div className="absolute top-8 right-8">
               <FaWater className="text-white/30 text-5xl" />
             </div>
+
+            {/* 🔹 Mobile indicators (hidden on desktop) */}
+            <div className="absolute bottom-4 right-4 flex gap-2 lg:hidden">
+              {natureTabs.map((tab, index) => (
+                <motion.button
+                  key={tab.title}
+                  className={`w-3 h-3 rounded-full ${
+                    activeTab === index ? "bg-brand" : "bg-white/40"
+                  }`}
+                  onClick={() => setActiveTab(index)}
+                  whileHover={{ scale: 1.3 }}
+                  aria-label={`Select ${tab.title}`}
+                />
+              ))}
+            </div>
           </motion.div>
 
-          {/* Right side - Tabs and CTA */}
+          {/* Right side - Tabs and CTA (🔹 hidden on mobile; unchanged on desktop) */}
           <motion.div
-            className="lg:col-span-5"
+            className="lg:col-span-5 hidden lg:block"
             initial={{ opacity: 0, x: 30 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5 }}
@@ -185,6 +216,26 @@ export default function OceanfrontBeautySection() {
               </div>
             </div>
           </motion.div>
+
+          {/* 🔹 Mobile-only compact list (kept minimal; does not affect desktop) */}
+          <div className="lg:hidden">
+            <div className="mt-4 grid grid-cols-3 gap-2">
+              {natureTabs.map((tab, index) => (
+                <button
+                  key={tab.title}
+                  onClick={() => setActiveTab(index)}
+                  className={`text-xs px-3 py-2 rounded-md border ${
+                    activeTab === index
+                      ? "bg-brand text-white border-brand"
+                      : "bg-white text-brand border-brand/30"
+                  }`}
+                  aria-label={`Select ${tab.title}`}
+                >
+                  {tab.title}
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

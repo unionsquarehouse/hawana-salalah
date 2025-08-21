@@ -32,15 +32,18 @@ export default function AboutSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="pt-16 md:py-20 xl:py-28 relative overflow-hidden"
+    >
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-[#1A3A2A] to-[#2e3d28]" />
         <div className="absolute inset-0 opacity-20 bg-[url('/assets/texture-pattern.png')] bg-repeat" />
         <div className="absolute inset-0 bg-black/30" />
       </div>
 
-      <div className="relative z-10  md:w-[95vw] mx-auto px-4 sm:px-6 lg:px-8 text-white">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div className="relative z-10 w-[95vw] 2xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8 text-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
@@ -71,7 +74,7 @@ export default function AboutSection() {
           </motion.div>
 
           <motion.div
-            className="relative h-[600px] w-full rounded-lg overflow-hidden border border-white/40 "
+            className="relative h-[320px] sm:h-[420px] md:h-[520px] lg:h-[600px] w-full rounded-lg overflow-hidden border border-white/40"
             initial={{ opacity: 0, scale: 0.9 }}
             animate={isVisible ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}

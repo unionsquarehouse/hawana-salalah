@@ -14,9 +14,9 @@ import CTASection from "@/components/sections/CTASection";
 
 const AboutPage = () => {
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-gray-50  ">
       {/* Hero Section */}
-      <section className="relative w-full h-[100vh] flex items-center justify-center overflow-hidden">
+      <section className="relative aspect-video flex items-center justify-center overflow-hidden">
         <Image
           src="/assets/hawana/8.jpg"
           alt="Salalah Coastline"
@@ -26,15 +26,15 @@ const AboutPage = () => {
         />
         <div className="absolute inset-0 bg-black/30" />
         <motion.div
-          className="relative text-center text-white z-10 w-[95vw] xl:w-[75vw] mx-auto"
+          className="relative text-center text-white z-10 w-[95vw] 2xl:w-[75vw] mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-7xl font-ivy font-bold mb-6">
+          <h1 className="text-5xl md:text-7xl font-ivy font-bold mb-6 hidden md:block">
             Discover Salalah
           </h1>
-          <p className="text-lg md:text-2xl font-sans max-w-3xl mx-auto">
+          <p className="text-lg md:text-2xl font-sans max-w-3xl mx-auto  hidden md:block  ">
             A coastal gem in Oman, Salalah offers unparalleled investment
             opportunities, blending natural beauty with sustainable growth,
             aligned with Oman Vision 2040.
@@ -43,9 +43,9 @@ const AboutPage = () => {
       </section>
 
       {/* Why Invest in Salalah Section */}
-      <section className="w-[95vw] xl:w-[75vw] mx-auto py-20">
+      <section className="w-[95vw] 2xl:w-[75vw] mx-auto py-20 ">
         <motion.div
-          className="text-center mb-16"
+          className="text-left lg:text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -54,8 +54,8 @@ const AboutPage = () => {
           <h2 className="text-4xl md:text-6xl font-ivy font-bold text-brand mb-6">
             Why Invest in Salalah
           </h2>
-          <div className="h-0.5 w-24 bg-brand mx-auto mb-8" />
-          <p className="text-lg md:text-xl font-sans text-brand/80 max-w-3xl mx-auto">
+          <div className="h-0.5 w-24 bg-brand mb-8 lg:mx-auto" />
+          <p className="text-lg md:text-xl font-sans text-brand/80 max-w-3xl lg:mx-auto">
             Salalah’s unique blend of economic potential, strategic location,
             and government-backed initiatives makes it a prime destination for
             investors seeking high returns.
@@ -103,7 +103,7 @@ const AboutPage = () => {
       </section>
 
       {/* Oman Vision 2040 Section */}
-      <section className="w-[95vw] xl:w-[75vw] mx-auto py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section className="w-[95vw] 2xl:w-[75vw] mx-auto pb-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center ">
           <Globe
             rotateCities={[
@@ -129,7 +129,7 @@ const AboutPage = () => {
             ]}
             glowColor={[0.1, 0.8, 1]}
             markerColor={[0.1, 0.8, 1]}
-            className="h-[60vh] w-[30vw]"
+            className="w-full aspect-square max-w-[300px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[560px] xl:max-w-[640px] mx-auto"
           />
           <motion.div
             initial={{ opacity: 0, x: 20 }}
@@ -171,7 +171,7 @@ const AboutPage = () => {
       </section>
 
       {/* CTA Section */}
-      <CTASection/>
+      <CTASection />
     </main>
   );
 };

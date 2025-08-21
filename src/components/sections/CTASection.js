@@ -38,7 +38,7 @@ export default function CTASection() {
     >
       {/* Background overlay */}
 
-      <div className="w-[95vw] xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div className="w-[95vw] 2xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         <motion.h2
           className="text-4xl md:text-6xl font-bold mb-6 font-ivy"
           initial={{ opacity: 0, y: 20 }}
@@ -61,7 +61,9 @@ export default function CTASection() {
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
         >
-          Book a private tour to explore Hawana Salalah’s luxurious freehold properties, from oceanfront villas to marina apartments, or download our brochure to discover Oman’s premier coastal destination.
+          Book a private tour to explore Hawana Salalah’s luxurious freehold
+          properties, from oceanfront villas to marina apartments, or download
+          our brochure to discover Oman’s premier coastal destination.
         </motion.p>
 
         <motion.div

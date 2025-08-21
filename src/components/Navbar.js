@@ -39,9 +39,7 @@ export default function Navbar() {
     };
   }, []);
 
-  const properties = [
-    { name: "Amazi", type: "villa" },
-  ];
+  const properties = [{ name: "Amazi", type: "villa" }];
 
   return (
     <nav
@@ -49,7 +47,7 @@ export default function Navbar() {
         scrolled ? "bg-brand shadow-md" : "bg-transparent"
       }`}
     >
-      <div className="w-[95vw] xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-[95vw] 2xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
@@ -60,7 +58,9 @@ export default function Navbar() {
                 width={150}
                 height={50}
                 priority
-                className={`object-contain ${!scrolled ? "brightness-0 invert" : ""}`}
+                className={`object-contain ${
+                  !scrolled ? "brightness-0 invert" : ""
+                }`}
               />
             </Link>
           </div>
@@ -93,7 +93,9 @@ export default function Navbar() {
                       {properties.map((property) => (
                         <Link
                           key={property.name}
-                          href={`/properties/${property.name.toLowerCase().replace(/\s+/g, '-')}`}
+                          href={`/properties/${property.name
+                            .toLowerCase()
+                            .replace(/\s+/g, "-")}`}
                           className="block px-4 py-2 text-base text-white hover:bg-white/10 font-sans font-semibold"
                           onClick={() => setIsLaunchesOpen(false)}
                           aria-label={`View ${property.name}`}
@@ -145,12 +147,12 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/contact"
+              href="/about"
               className="block font-ivy font-medium text-white hover:bg-white/10 rounded-lg px-4 py-2"
               onClick={() => setIsMenuOpen(false)}
-              aria-label="Contact"
+              aria-label="About"
             >
-              Contact
+              About
             </Link>
 
             {/* Latest Launches Collapsible */}
@@ -173,7 +175,9 @@ export default function Navbar() {
                   {properties.map((property) => (
                     <Link
                       key={property.name}
-                      href={`/properties/${property.name.toLowerCase().replace(/\s+/g, '-')}`}
+                      href={`/properties/${property.name
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}`}
                       className="block font-ivy text-base text-white hover:bg-white/10 px-6 py-2"
                       onClick={() => {
                         setIsMenuOpen(false);

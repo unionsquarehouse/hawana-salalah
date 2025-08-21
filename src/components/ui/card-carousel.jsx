@@ -8,7 +8,12 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { SparklesIcon } from "lucide-react";
-import { Autoplay, EffectCoverflow, Navigation, Pagination } from "swiper/modules";
+import {
+  Autoplay,
+  EffectCoverflow,
+  Navigation,
+  Pagination,
+} from "swiper/modules";
 import { Badge } from "@/components/ui/badge";
 
 export const CardCarousel = ({
@@ -74,33 +79,32 @@ export const CardCarousel = ({
   return (
     <section className="w-full py-4">
       <style>{css}</style>
-      <div className="mx-auto w-[95vw] xl:w-[75vw] rounded-[24px] border border-black/5 p-2 shadow-sm">
-        <div className="relative mx-auto flex w-full flex-col rounded-[24px] border border-black/5 bg-gray-50/50 p-2 shadow-sm items-center md:gap-8 md:p-4">
-          
+      <div className="mx-auto w-[95vw] 2xl:w-[75vw] rounded-[24px] border border-black/5 p-2 shadow-sm">
+        <div className="relative mx-auto flex w-full flex-col rounded-[24px] border border-black/5 bg-gray-50/50 p-2 shadow-sm items-start lg:items-center md:gap-8 md:p-4">
           <motion.div
-            className="text-center mb-16"
+            className="text-left lg:text-center mb-10 md:mb-16 w-full"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="flex items-center justify-start lg:justify-center gap-3 mb-4">
               <h3 className="text-brand font-medium uppercase tracking-wider text-sm md:text-xl font-sans">
                 Project Gallery
               </h3>
             </div>
 
-            <h2 className="text-4xl md:text-6xl font-ivy font-bold text-brand mb-6">
+            <h2 className="text-4xl md:text-6xl font-ivy font-bold text-brand mb-4 md:mb-6">
               Interior Gallery
             </h2>
 
-            <div className="h-0.5 w-24 bg-brand mx-auto mb-8" />
+            <div className="h-0.5 w-24 bg-brand mb-6 md:mb-8 lg:mx-auto" />
 
-            <p className="text-lg md:text-xl font-sans text-brand/80 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl font-sans text-brand/80 max-w-3xl lg:mx-auto">
               Explore the luxurious interiors of Amazi’s villas and chalets.
             </p>
           </motion.div>
 
-          <div className="flex w-full items-center justify-center gap-4">
+          <div className="flex w-full items-center justify-start lg:justify-center gap-4">
             <div className="w-full">
               <Swiper
                 spaceBetween={30}
@@ -118,6 +122,10 @@ export const CardCarousel = ({
                   stretch: 0,
                   depth: 150,
                   modifier: 2,
+                }}
+                breakpoints={{
+                  0: { centeredSlides: false },
+                  1024: { centeredSlides: true },
                 }}
                 pagination={showPagination ? { clickable: true } : false}
                 navigation={

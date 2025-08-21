@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 import { FaUmbrellaBeach, FaWater, FaShip, FaArrowRight } from "react-icons/fa";
 
-export default function   PropertyTypesSection() {
+export default function PropertyTypesSection() {
   const [isVisible, setIsVisible] = useState(false);
   const [activeDistrict, setActiveDistrict] = useState(0);
   const sectionRef = useRef(null);
@@ -61,28 +61,23 @@ export default function   PropertyTypesSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setIsVisible(true);
-          }
-        });
+        for (const entry of entries) {
+          if (entry.isIntersecting) setIsVisible(true);
+        }
       },
       { threshold: 0.2 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
+  // Mobile-only auto-rotate (keeps desktop behavior unchanged)
   useEffect(() => {
     if (!isVisible) return;
+    const isDesktop =
+      typeof window !== "undefined" &&
+      window.matchMedia("(min-width: 1024px)").matches;
+    if (isDesktop) return;
 
     const interval = setInterval(() => {
       setActiveDistrict((prev) => (prev + 1) % properties.length);
@@ -92,10 +87,10 @@ export default function   PropertyTypesSection() {
   }, [isVisible, properties.length]);
 
   return (
-    <section ref={sectionRef} className="pt-24 md:pt-32 bg-white">
-      <div className="w-[95vw] xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} className="pt-16 md:py-20 xl:py-28 bg-white">
+      <div className="w-[95vw] 2xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="text-center mb-16"
+          className="text-left lg:text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
@@ -103,18 +98,19 @@ export default function   PropertyTypesSection() {
           <h2 className="text-4xl md:text-6xl font-ivy font-bold text-brand mb-8 leading-tight">
             Hawana Salalah’s Premier Residences
           </h2>
-          <div className="h-0.5 w-24 bg-brand mx-auto mb-8" />
-          <p className="text-brand w-[45vw] text-lg md:text-xl font-sans mx-auto">
+          <div className="h-0.5 w-24 bg-brand mb-8 lg:mx-auto" />
+          {/* Responsive width: full on mobile, tight on xl */}
+          <p className="text-brand w-full xl:w-[45vw] text-base sm:text-lg md:text-xl font-sans lg:mx-auto">
             Discover Hawana Salalah’s exclusive freehold properties, from
             oceanfront villas to lagoon-front homes, offering luxury, Omani
             residency, and vibrant coastal living.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
           {/* Left side - Image */}
           <motion.div
-            className="relative h-[500px] rounded-2xl overflow-hidden"
+            className="relative h-[320px] sm:h-[420px] rounded-2xl overflow-hidden"
             initial={{ opacity: 0, x: -30 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -138,21 +134,35 @@ export default function   PropertyTypesSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
-                <div className="absolute bottom-0 left-0 p-8">
-                  <div className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md rounded-full mb-4">
-                    <span className="text-white text-sm md:text-base font-medium">
+                <div className="absolute bottom-0 left-0 p-4 sm:p-6 lg:p-8">
+                  <div className="inline-flex items-center px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-md rounded-full mb-3 sm:mb-4">
+                    <span className="text-white text-xs sm:text-sm md:text-base font-medium">
                       {property.specs}
                     </span>
                   </div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 font-ivy">
+                  <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-1 sm:mb-2 font-ivy">
                     {property.title}
                   </h3>
-                  <p className="text-white/80 text-lg md:text-xl">
+                  <p className="text-white/80 text-sm sm:text-base md:text-xl">
                     {property.price}
                   </p>
                 </div>
               </motion.div>
             ))}
+
+            {/* Mobile indicators (hidden on lg+) */}
+            <div className="absolute bottom-3 right-3 flex gap-2 lg:hidden">
+              {properties.map((p, i) => (
+                <button
+                  key={p.title}
+                  onClick={() => setActiveDistrict(i)}
+                  className={`w-2.5 h-2.5 rounded-full ${
+                    activeDistrict === i ? "bg-brand" : "bg-white/50"
+                  }`}
+                  aria-label={`Show ${p.title}`}
+                />
+              ))}
+            </div>
           </motion.div>
 
           {/* Right side - Content */}
@@ -162,29 +172,29 @@ export default function   PropertyTypesSection() {
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <div className="bg-gray-50 rounded-2xl h-full flex flex-col">
-              {/* Property tabs - 4 in a row */}
-              <div className="grid grid-cols-4 gap-1 mb-6">
+            <div className="bg-gray-50 rounded-2xl h-full flex flex-col p-4 sm:p-6 lg:p-8">
+              {/* Property tabs */}
+              <div className="grid grid-cols-3 sm:grid-cols-4 gap-1 mb-4 sm:mb-6">
                 {properties.map((district, index) => (
                   <button
                     key={index}
                     onClick={() => setActiveDistrict(index)}
-                    className={`flex flex-col items-center justify-center p-2 rounded-lg transition-colors ${
+                    className={`flex items-center justify-center px-2 py-2 sm:p-2 rounded-lg transition-colors text-xs sm:text-sm md:text-base ${
                       activeDistrict === index
                         ? "bg-brand text-white"
                         : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                     }`}
                     aria-label={`View ${district.title} details`}
                   >
-                    <span className="text-xs md:text-lg">{district.title}</span>
+                    {district.title}
                   </button>
                 ))}
-                {/* Empty tab to maintain 4-column layout */}
-                <div className="flex flex-col items-center justify-center p-2 rounded-lg bg-gray-200"></div>
+                {/* spacer only on >=sm to preserve 4-col symmetry */}
+                <div className="hidden sm:block p-2 rounded-lg bg-gray-200"></div>
               </div>
 
               {/* District content */}
-              <div className="relative flex-grow">
+              <div className="relative flex-grow h-[35vh]">
                 {properties.map((district, index) => (
                   <motion.div
                     key={index}
@@ -199,21 +209,21 @@ export default function   PropertyTypesSection() {
                       pointerEvents: activeDistrict === index ? "auto" : "none",
                     }}
                   >
-                    <p className="text-gray-600 mb-6 text-sm md:text-lg">
+                    <p className="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base md:text-lg">
                       {district.description}
                     </p>
 
-                    <div className="mb-8 flex-grow">
-                      <h4 className="text-gray-900 font-medium mb-4 text-md md:text-xl">
+                    <div className="mb-6 sm:mb-8 flex-grow">
+                      <h4 className="text-gray-900 font-medium mb-3 sm:mb-4 text-sm sm:text-base md:text-xl">
                         Key Features:
                       </h4>
-                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm md:text-lg">
+                      <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm sm:text-base md:text-lg">
                         {district.features.map((feature, i) => (
                           <li
                             key={i}
                             className="flex items-center gap-2 text-gray-700"
                           >
-                            <div className="w-2 h-2 rounded-full bg-brand"></div>
+                            <div className="w-2 h-2 rounded-full bg-brand" />
                             {feature}
                           </li>
                         ))}
@@ -226,7 +236,7 @@ export default function   PropertyTypesSection() {
                           .toLowerCase()
                           .replace(/\s+/g, "-")}`}
                         variant="solid"
-                        className="bg-brand text-white hover:bg-brand/90 flex items-center gap-2 w-full justify-center md:text-lg"
+                        className="bg-brand text-white hover:bg-brand/90 flex items-center gap-2 w-full justify-center text-sm sm:text-base md:text-lg"
                         aria-label={`Discover ${district.title}`}
                       >
                         Discover {district.title} <FaArrowRight />

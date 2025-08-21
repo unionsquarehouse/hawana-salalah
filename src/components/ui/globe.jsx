@@ -1,4 +1,4 @@
-"use client";;
+"use client";
 import { useEffect, useRef, useState } from "react";
 import { useSpring } from "@react-spring/web";
 import createGlobe from "cobe";
@@ -30,11 +30,11 @@ export default function Globe({
   ],
 
   scale = 1,
-  className = "aspect-square w-full max-w-[600px]",
+  className = "w-full aspect-square max-w-[300px] sm:max-w-[380px] md:max-w-[480px] lg:max-w-[560px] xl:max-w-[640px]",
   rotateToLocation,
   autoRotate = true,
   rotateCities = [],
-  rotationSpeed = 3000
+  rotationSpeed = 3000,
 }) {
   const canvasRef = useRef(null);
   const containerRef = useRef(null);
@@ -62,10 +62,13 @@ export default function Globe({
 
     const container = containerRef.current;
 
-    const observer = new IntersectionObserver((entries) => {
-      const [entry] = entries;
-      setIsVisible(entry.isIntersecting);
-    }, { threshold: 0.1 });
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1 }
+    );
 
     observer.observe(container);
 
@@ -126,6 +129,10 @@ export default function Globe({
     if (!isVisible || !canvasRef.current) return;
 
     let width = canvasRef.current.offsetWidth || 300;
+    const pixelRatio =
+      typeof window !== "undefined"
+        ? Math.min(2, window.devicePixelRatio || 1)
+        : 2;
     const doublePi = Math.PI * 2;
     let currentPhi = 0;
     let currentTheta = 0;
@@ -138,12 +145,20 @@ export default function Globe({
     };
 
     window.addEventListener("resize", onResize);
+    let resizeObserver;
+    if (
+      typeof ResizeObserver !== "undefined" &&
+      canvasRef.current?.parentElement
+    ) {
+      resizeObserver = new ResizeObserver(() => onResize());
+      resizeObserver.observe(canvasRef.current.parentElement);
+    }
 
     try {
       globeRef.current = createGlobe(canvasRef.current, {
-        devicePixelRatio: 2,
-        width: width * 2,
-        height: width * 2,
+        devicePixelRatio: pixelRatio,
+        width: width * pixelRatio,
+        height: width * pixelRatio,
         phi: 0,
         theta: 0,
         dark: 1,
@@ -178,8 +193,8 @@ export default function Globe({
 
           state.phi = currentPhi;
           state.theta = focusRef.current ? currentTheta : 0;
-          state.width = width * 2;
-          state.height = width * 2;
+          state.width = width * pixelRatio;
+          state.height = width * pixelRatio;
         },
       });
 
@@ -198,6 +213,9 @@ export default function Globe({
         globeRef.current = null;
       }
       window.removeEventListener("resize", onResize);
+      if (resizeObserver) {
+        resizeObserver.disconnect();
+      }
       if (animationFrame) {
         cancelAnimationFrame(animationFrame);
       }
@@ -245,7 +263,8 @@ export default function Globe({
           }
         }}
         className="w-full h-full cursor-grab opacity-0 transition-opacity duration-1000"
-        style={{ contain: "layout paint size" }} />
+        style={{ contain: "layout paint size" }}
+      />
     </div>
   );
 }

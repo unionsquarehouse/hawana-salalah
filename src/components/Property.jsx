@@ -22,8 +22,8 @@ const HeroSection = ({
   heroOpacity,
   onReserveClick,
 }) => (
-  <div className="relative h-screen overflow-hidden">
-    <motion.div className="absolute inset-0 z-0" style={{ scale: heroScale }}>
+  <div className="relative aspect-video  ">
+    <motion.div className="absolute  inset-0 z-0" style={{ scale: heroScale }}>
       <Image
         src={details?.image}
         alt={property?.name}
@@ -35,7 +35,7 @@ const HeroSection = ({
     </motion.div>
 
     <motion.div
-      className="absolute inset-0 z-10 flex flex-col justify-end items-center text-center pb-32"
+      className="absolute inset-0 z-10  flex-col justify-center items-center text-center pb-20 md:pb-32 hidden md:flex"
       style={{ opacity: heroOpacity }}
     >
       <motion.div
@@ -44,16 +44,16 @@ const HeroSection = ({
         transition={{ duration: 0.8, delay: 0.2 }}
         className="px-4"
       >
-        <h1 className="text-6xl md:text-7xl font-bold text-white mb-6 font-ivy tracking-tight">
+        <h1 className="text-4xl md:text-6xl xl:text-7xl font-bold text-white mb-6 font-ivy tracking-tight hidden md:block">
           {property?.name}
         </h1>
-        <p className="text-white/90 text-xl md:text-3xl mb-10 mx-auto font-sans font-light">
+        <p className="text-white/90 text-base md:text-2xl mb-8 md:mb-10 mx-auto font-sans font-light  hidden md:block">
           {details?.tagline}
         </p>
-        <div className="flex flex-wrap gap-4 justify-center">
+        <div className="flex flex-wrap gap-4 justify-center   ">
           <button
             onClick={() => onReserveClick(property)}
-            className="group relative overflow-hidden rounded-full bg-white px-8 py-4 text-gray-900 transition-all hover:shadow-lg hover:shadow-white/20"
+            className="group relative overflow-hidden rounded-full bg-white px-8 py-4 text-gray-900 transition-all hover:shadow-lg hover:shadow-white/20 w-[88vw] sm:w-auto"
           >
             <span className="relative z-10 flex items-center gap-2 text-brand">
               <FaArrowRight className="md:text-md" />
@@ -64,7 +64,7 @@ const HeroSection = ({
           <a
             href="/assets/hawana/amazi-brochure.pdf"
             download
-            className="group relative overflow-hidden rounded-full bg-transparent border border-white px-8 py-4 text-white transition-all hover:shadow-lg hover:shadow-white/20"
+            className="group relative overflow-hidden rounded-full bg-transparent border border-white px-8 py-4 text-white transition-all hover:shadow-lg hover:shadow-white/20 w-[88vw] sm:w-auto"
           >
             <span className="relative z-10 flex items-center gap-2">
               <span className="md:text-md">Download Brochure</span>
@@ -89,7 +89,7 @@ const HeroSection = ({
 const StatsBar = ({ details, property }) => (
   <div className="relative z-30 mx-auto px-4 -mt-16">
     <motion.div
-      className="w-[95vw] xl:w-[75vw] mx-auto grid grid-cols-2 gap-4 bg-white/90 backdrop-blur-lg rounded-2xl shadow-2xl shadow-black/5 p-1 border border-white/20"
+      className="w-[95vw] 2xl:w-[75vw] mx-auto grid grid-cols-2 gap-4 bg-white/90 backdrop-blur-lg rounded-2xl shadow-2xl shadow-black/5 p-1 border border-white/20"
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
@@ -116,26 +116,28 @@ const StatsBar = ({ details, property }) => (
 
 // Overview Section Component
 const OverviewSection = ({ property, details }) => (
-  <div className="py-32">
-    <div className="w-[95vw] xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+  <div className="pt-16 md:py-20 xl:py-28">
+    <div className="w-[95vw] 2xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 items-center">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-brand mb-8 font-ivy relative">
+          <h2 className="text-4xl md:text-6xl font-bold text-brand mb-6 md:mb-8 font-ivy relative">
             <span className="relative z-10">Exclusive Waterfront Living</span>
             <span className="absolute -left-4 top-1/2 -translate-y-1/2 w-16 h-16 bg-brand/10 rounded-full blur-xl z-0"></span>
           </h2>
 
-          <p className="text-brand text-sm md:text-lg mb-6 font-sans">
+          <p className="text-brand text-lg md:text-xl mb-4 md:mb-6 font-sans">
             {details.description}
           </p>
 
           <p className="text-brand text-sm md:text-lg mb-6 font-sans">
-            {property.name} redefines luxury with its seamless blend of modern architecture and the serene beauty of Hawana Salalah’s Arabian Sea coastline, offering an unparalleled resort lifestyle.
+            {property.name} redefines luxury with its seamless blend of modern
+            architecture and the serene beauty of Hawana Salalah’s Arabian Sea
+            coastline, offering an unparalleled resort lifestyle.
           </p>
 
           <div className="grid grid-cols-2 gap-6 mb-8">
@@ -161,7 +163,7 @@ const OverviewSection = ({ property, details }) => (
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
         >
-          <div className="relative h-[600px] rounded-2xl overflow-hidden">
+          <div className="relative h-[320px] sm:h-[420px] md:h-[520px] lg:h-[600px] rounded-2xl overflow-hidden">
             <Image
               src={details.image2}
               alt={property.name}
@@ -185,11 +187,11 @@ const AmenitiesSection = ({
 }) => (
   <section
     ref={amenitiesSectionRef}
-    className="bg-gradient-to-b from-gray-50 to-white text-brand py-20 overflow-hidden"
+    className="bg-gradient-to-b from-gray-50 to-white text-brand pt-20 overflow-hidden"
   >
-    <div className="w-[95vw] xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="w-[95vw] 2xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8">
       <motion.div
-        className="text-center mb-16"
+        className="text-left lg:text-center mb-16"
         initial={{ opacity: 0, y: 30 }}
         animate={isAmenitiesVisible ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.8 }}
@@ -197,15 +199,16 @@ const AmenitiesSection = ({
         <h2 className="text-4xl md:text-6xl font-bold text-brand mb-8 font-ivy">
           Resort-Style Amenities
         </h2>
-        <div className="h-0.5 w-24 bg-brand mx-auto mb-6" />
-        <p className="text-brand text-sm md:text-lg mb-6 font-sans">
-          Immerse yourself in a world-class resort lifestyle with amenities that complement the natural beauty of Hawana Salalah’s coastline.
+        <div className="h-0.5 w-24 bg-brand mb-6 lg:mx-auto" />
+        <p className="text-brand text-lg md:text-xl mb-6 font-sans lg:mx-auto">
+          Immerse yourself in a world-class resort lifestyle with amenities that
+          complement the natural beauty of Hawana Salalah’s coastline.
         </p>
       </motion.div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
         <motion.div
-          className="lg:col-span-7 relative rounded-xl overflow-hidden"
+          className="lg:col-span-7 relative h-[320px] sm:h-[420px] md:h-[520px] lg:h-[560px] rounded-xl overflow-hidden"
           initial={{ opacity: 0, x: -30 }}
           animate={isAmenitiesVisible ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -243,7 +246,7 @@ const AmenitiesSection = ({
                     {amenity.name}
                   </h3>
                   <div className="h-0.5 w-12 bg-white/70 mb-4" />
-                  <p className="text-white/90 font-sans md:text-md">
+                  <p className="text-white/90 font-sans ">
                     {amenity.description}
                   </p>
                 </motion.div>
@@ -271,7 +274,7 @@ const AmenitiesSection = ({
           animate={isAmenitiesVisible ? { opacity: 1, x: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-sm border border-white/20">
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-sm border border-white/20 hidden md:block">
             <h3 className="text-2xl md:text-3xl font-ivy mb-6 font-semibold text-brand">
               Our Amenities
             </h3>
@@ -304,7 +307,7 @@ const AmenitiesSection = ({
                       </h4>
                       {activeAmenityIndex === index && (
                         <motion.p
-                          className="text-sm md:text-base font-sans mt-2 text-white/80"
+                          className="text-sm md:text-base font-sans mt-2 text-white/80 "
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: "auto" }}
                           transition={{ duration: 0.3 }}

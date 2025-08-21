@@ -63,31 +63,42 @@ export default function AmenitiesSection() {
     };
   }, []);
 
+  // Auto-rotate images
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setActiveIndex((prevIndex) => (prevIndex + 1) % amenitiesData.length);
+    }, 4000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <section
       ref={sectionRef}
-      className="bg-gradient-to-b from-brand/5 to-white text-brand py-20 md:py-28 overflow-hidden relative"
+      className="bg-gradient-to-b from-brand/5 to-white text-brand pt-16 md:py-20 xl:py-28 overflow-hidden relative"
     >
-      <div className="w-[95vw] xl:w-[75vw] mx-auto ">
+      <div className="w-[95vw] 2xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          className="text-center mb-12"
+          className="text-left lg:text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl md:text-6xl font-ivy font-bold mb-4 text-brand">
+          <h2 className="text-4xl 2xl:text-6xl font-ivy font-bold mb-4 text-brand">
             Discover Hawana Salalah’s World-Class Amenities
           </h2>
-          <div className="h-0.5 w-24 bg-brand mx-auto mb-6" />
-          <p className="w-[45vw] text-lg md:text-xl font-sans text-brand mx-auto">
-            Indulge in luxury and leisure with pristine beaches, a vibrant marina, thrilling water adventures, and exquisite dining, all within Oman’s fastest-growing destination.
+          <div className="h-0.5 w-24 bg-brand mb-6 lg:mx-auto" />
+          <p className="w-[90vw] lg:w-[65vw] xl:w-[45vw] text-base md:text-lg xl:text-xl font-sans text-brand lg:mx-auto">
+            Indulge in luxury and leisure with pristine beaches, a vibrant
+            marina, thrilling water adventures, and exquisite dining, all within
+            Oman’s fastest-growing destination.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8 mx-auto items-stretch">
           {/* Left side - Image display */}
           <motion.div
-            className="lg:col-span-6 relative rounded-lg overflow-hidden shadow-md"
+            className="lg:col-span-6 relative rounded-lg overflow-hidden shadow-md h-full min-h-[260px] sm:min-h-[340px] md:min-h-[420px] lg:min-h-[520px]"
             initial={{ opacity: 0, x: -30 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.3 }}
@@ -120,11 +131,11 @@ export default function AmenitiesSection() {
                     }
                     transition={{ duration: 0.5, delay: 0.2 }}
                   >
-                    <h3 className="text-white text-2xl md:text-3xl font-ivy mb-2">
+                    <h3 className="text-white text-xl md:text-2xl xl:text-3xl font-ivy mb-2">
                       {amenity.name}
                     </h3>
                     <div className="h-0.5 w-12 bg-white/70 mb-4" />
-                    <p className="text-white/90 text-sm md:text-base font-sans">
+                    <p className="text-white/90 text-sm md:text-base xl:text-base font-sans">
                       {amenity.description}
                     </p>
                   </motion.div>
@@ -137,7 +148,7 @@ export default function AmenitiesSection() {
               {amenitiesData.map((amenity, index) => (
                 <motion.button
                   key={index}
-                  className={`w-3 h-3 rounded-full ${
+                  className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full ${
                     activeIndex === index ? "bg-brand" : "bg-white/40"
                   }`}
                   onClick={() => setActiveIndex(index)}
@@ -150,20 +161,20 @@ export default function AmenitiesSection() {
 
           {/* Right side - Amenities list */}
           <motion.div
-            className="lg:col-span-6"
+            className="hidden lg:block lg:col-span-6 h-full min-h-[260px] sm:min-h-[340px] md:min-h-[420px] lg:min-h-[520px]"
             initial={{ opacity: 0, x: 30 }}
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.5 }}
           >
-            <div className="bg-white/90 backdrop-blur-md p-6 rounded-lg shadow-md border border-brand/20">
-              <h3 className="text-xl md:text-2xl font-ivy mb-6 font-semibold text-brand">
+            <div className="bg-white/90 backdrop-blur-md p-4 md:p-6 rounded-lg shadow-md border border-brand/20 h-full flex flex-col">
+              <h3 className="text-lg md:text-xl xl:text-2xl font-ivy mb-4 md:mb-6 font-semibold text-brand">
                 Hawana Salalah Amenities
               </h3>
-              <div className="space-y-4">
+              <div className="space-y-4 flex-1 overflow-auto pr-1">
                 {amenitiesData.map((amenity, index) => (
                   <motion.div
                     key={index}
-                    className={`p-4 rounded-lg cursor-pointer transition-all duration-300 ${
+                    className={`p-3 md:p-4 rounded-lg cursor-pointer transition-all duration-300 ${
                       activeIndex === index
                         ? "bg-brand text-white"
                         : "bg-brand/5 hover:bg-brand/10 hover:shadow-md"
@@ -174,19 +185,19 @@ export default function AmenitiesSection() {
                   >
                     <div className="flex items-center gap-4">
                       <div
-                        className={`text-2xl ${
+                        className={`text-xl md:text-2xl ${
                           activeIndex === index ? "text-white" : "text-brand"
                         }`}
                       >
                         {amenity.icon}
                       </div>
                       <div>
-                        <h4 className="font-semibold text-base md:text-lg">
+                        <h4 className="font-semibold text-sm md:text-base 2xl:text-lg">
                           {amenity.name}
                         </h4>
                         {activeIndex === index && (
                           <motion.p
-                            className="text-sm md:text-base font-sans mt-2 text-white/80"
+                            className="text-sm md:text-base xl:text-base font-sans mt-2 text-white/80"
                             initial={{ opacity: 0, height: 0 }}
                             animate={{ opacity: 1, height: "auto" }}
                             transition={{ duration: 0.3 }}

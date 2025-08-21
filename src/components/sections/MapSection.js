@@ -41,13 +41,12 @@ export default function MapSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative bg-gradient-to-b from-white to-brand/5 overflow-hidden  py-24 md:py-32"
+      className="relative bg-gradient-to-b from-white to-brand/5 overflow-hidden pt-16 md:py-20 xl:py-28  px-4 sm:px-6 lg:px-8"
     >
       {/* Background wave pattern */}
-      <div className="absolute top-0 left-0 w-full h-32 bg-[url('/assets/wave-pattern.png')] bg-repeat-x opacity-10" />
 
       {/* Section header */}
-      <div className="relative z-10 pt-20 pb-12 text-center">
+      <div className="relative z-10  md:pt-20  text-left lg:text-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isVisible ? { opacity: 1, y: 0 } : {}}
@@ -59,11 +58,11 @@ export default function MapSection() {
           <h2 className="text-4xl md:text-6xl font-ivy font-bold text-brand mb-6">
             Coastal Gateway to Salalah
           </h2>
-          <div className="h-0.5 w-24 bg-brand mx-auto mb-8" />
+          <div className="h-0.5 w-24 bg-brand mb-8 lg:mx-auto" />
         </motion.div>
       </div>
 
-      <div className="relative z-10 w-[95vw] xl:w-[75vw] mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+      <div className="relative z-10 w-[95vw] 2xl:w-[75vw] mx-auto pb-24  px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 justify-center items-start">
           {/* Left side - Content */}
           <motion.div
@@ -72,7 +71,7 @@ export default function MapSection() {
             animate={isVisible ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="bg-white p-8 rounded-xl shadow-lg border border-brand/10">
+            <div className="bg-white p-2 rounded-xl shadow-lg border border-brand/10">
               <p className="text-gray-600 mb-8 text-base md:text-lg font-sans">
                 Nestled along Salalah’s pristine coastline, Amazi at Hawana
                 Salalah offers a serene retreat with excellent connectivity to
